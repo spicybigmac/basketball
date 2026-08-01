@@ -1,0 +1,128 @@
+import json
+classes = 8
+with open("training/history.json", "r") as f:
+    history = json.loads(f)
+
+print(len(history))
+
+{
+ "cells": [
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "id": "152f2474",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "import json\n",
+    "classes = 8\n",
+    "with open(\"training/history.json\", \"r\") as f:\n",
+    "    history = json.loads(f)\n",
+    "\n",
+    "print(len(history))"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "id": "0166cd2a",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "# visualizations\n",
+    "\n",
+    "from matplotlib import pyplot as plt\n",
+    "\n",
+    "# train and test loss over epochs\n",
+    "\n",
+    "plt.plot([i for i in range(1,len(history))], [history[i][0] for i in range(len(history))], label=\"training\", color=\"blue\")\n",
+    "plt.plot([i for i in range(1,len(history))], [history[i][4] for i in range(len(history))], label=\"validation\", color=\"red\")\n",
+    "\n",
+    "plt.xlabel(\"Epochs\")\n",
+    "plt.ylabel(\"Average Loss\")\n",
+    "plt.title(\"Average Loss per Epoch\")\n",
+    "\n",
+    "plt.legend()\n",
+    "plt.savefig(\"loss\")\n",
+    "plt.show()\n",
+    "\n",
+    "\n",
+    "# train and test accuracy over epochs\n",
+    "\n",
+    "plt.plot([i for i in range(1,len(history)+1)], [history[i][1] for i in range(len(history))], label=\"training\", color=\"blue\", ls=\"--\")\n",
+    "plt.plot([i for i in range(1,len(history)+1)], [history[i][5] for i in range(len(history))], label=\"validation\", color=\"red\", ls=\"--\")\n",
+    "\n",
+    "plt.xlabel(\"Epochs\")\n",
+    "plt.ylabel(\"Accuracy\")\n",
+    "plt.title(\"Accuracy per Epoch\")\n",
+    "\n",
+    "plt.legend()\n",
+    "plt.savefig(\"acc\")\n",
+    "plt.show()\n",
+    "\n",
+    "\n",
+    "# loss of each class over epochs\n",
+    "\n",
+    "colors = [\"red\",\"orange\",\"yellow\",\"green\",\"blue\",\"cyan\",\"purple\",\"black\"]\n",
+    "\n",
+    "# training\n",
+    "for j in range(classes):\n",
+    "    plt.plot([i for i in range(1,len(history)+1)], [history[i][2][j] for i in range(len(history))], label=f\"{traindata.classes[j]}\", color=colors[j], ls=\"-\")\n",
+    "\n",
+    "plt.xlabel(\"Epochs\")\n",
+    "plt.ylabel(\"Accuracy\")\n",
+    "plt.title(\"Average Loss per Class per Epoch (training)\")\n",
+    "\n",
+    "plt.legend()\n",
+    "plt.savefig(\"classlosstrain\")\n",
+    "plt.show()\n",
+    "\n",
+    "# validation\n",
+    "for j in range(classes):\n",
+    "    plt.plot([i for i in range(1,len(history)+1)], [history[i][6][j] for i in range(len(history))], label=f\"{testdata.classes[j]}\", color=colors[j], ls=\"--\")\n",
+    "\n",
+    "plt.xlabel(\"Epochs\")\n",
+    "plt.ylabel(\"Accuracy\")\n",
+    "plt.title(\"Average Loss per Class per Epoch (validation)\")\n",
+    "\n",
+    "plt.legend()\n",
+    "plt.savefig(\"classlossval\")\n",
+    "plt.show()\n",
+    "\n",
+    "\n",
+    "# accuracy of each class over epochs\n",
+    "\n",
+    "# training\n",
+    "for j in range(classes):\n",
+    "    plt.plot([i for i in range(1,len(history)+1)], [history[i][3][j] for i in range(len(history))], label=f\"{traindata.classes[j]}\", color=colors[j])\n",
+    "\n",
+    "plt.xlabel(\"Epochs\")\n",
+    "plt.ylabel(\"Accuracy\")\n",
+    "plt.title(\"Accuracy per Class per Epoch (training)\")\n",
+    "\n",
+    "plt.legend()\n",
+    "plt.savefig(\"classacctrain\")\n",
+    "plt.show()\n",
+    "\n",
+    "# validation\n",
+    "for j in range(classes):\n",
+    "    plt.plot([i for i in range(1,len(history)+1)], [history[i][7][j] for i in range(len(history))], label=f\"{testdata.classes[j]}\", color=colors[j])\n",
+    "\n",
+    "plt.xlabel(\"Epochs\")\n",
+    "plt.ylabel(\"Accuracy\")\n",
+    "plt.title(\"Accuracy per Class per Epoch (validation)\")\n",
+    "\n",
+    "plt.legend()\n",
+    "plt.savefig(\"classaccval\")\n",
+    "plt.show()"
+   ]
+  }
+ ],
+ "metadata": {
+  "language_info": {
+   "name": "python"
+  }
+ },
+ "nbformat": 4,
+ "nbformat_minor": 5
+}
