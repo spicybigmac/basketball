@@ -15,6 +15,7 @@ venv/
 .idea/
 *.swp
 *~
+.history
 
 # OS
 .DS_Store
